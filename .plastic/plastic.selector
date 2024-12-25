@@ -1,0 +1,4 @@
+repository "Castle Warriors/Castle Warriors@2473955357102@cloud"
+  path "/"
+    br "/main"
+    co "/main"
