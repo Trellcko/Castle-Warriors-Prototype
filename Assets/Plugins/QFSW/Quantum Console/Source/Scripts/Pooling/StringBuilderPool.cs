@@ -4,21 +4,19 @@ namespace QFSW.QC.Pooling
 {
     public class ConcurrentStringBuilderPool : StringBuilderPool<ConcurrentPool<StringBuilder>>
     {
-
     }
 
     public class StringBuilderPool : StringBuilderPool<Pool<StringBuilder>>
     {
-
     }
 
     public class StringBuilderPool<TPool> where TPool : IPool<StringBuilder>, new()
     {
-        private readonly TPool _pool = new TPool();
+        private readonly TPool _pool = new();
 
         public StringBuilder GetStringBuilder(int minCapacity = 0)
         {
-            StringBuilder stringBuilder = _pool.GetObject();
+            var stringBuilder = _pool.GetObject();
             stringBuilder.Clear();
             stringBuilder.EnsureCapacity(minCapacity);
 
@@ -27,7 +25,7 @@ namespace QFSW.QC.Pooling
 
         public string ReleaseAndToString(StringBuilder stringBuilder)
         {
-            string result = stringBuilder.ToString();
+            var result = stringBuilder.ToString();
             _pool.Release(stringBuilder);
 
             return result;

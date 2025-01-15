@@ -1,7 +1,7 @@
 ﻿namespace QFSW.QC
 {
     /// <summary>
-    /// The context that an action is being invoked on.
+    ///     The context that an action is being invoked on.
     /// </summary>
     public struct ActionContext
     {

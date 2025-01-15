@@ -4,59 +4,41 @@ namespace Zenject.SpaceFighter
 {
     public class Player
     {
-        readonly Rigidbody _rigidBody;
-        readonly MeshRenderer _renderer;
-
-        float _health = 100.0f;
+        private readonly Rigidbody _rigidBody;
 
         public Player(
             Rigidbody rigidBody,
             MeshRenderer renderer)
         {
             _rigidBody = rigidBody;
-            _renderer = renderer;
+            Renderer = renderer;
         }
 
-        public MeshRenderer Renderer
-        {
-            get { return _renderer; }
-        }
+        public MeshRenderer Renderer { get; }
 
-        public bool IsDead
-        {
-            get; set;
-        }
+        public bool IsDead { get; set; }
 
-        public float Health
-        {
-            get { return _health; }
-        }
+        public float Health { get; private set; } = 100.0f;
 
-        public Vector3 LookDir
-        {
-            get { return -_rigidBody.transform.right; }
-        }
+        public Vector3 LookDir => -_rigidBody.transform.right;
 
         public Quaternion Rotation
         {
-            get { return _rigidBody.rotation; }
-            set { _rigidBody.rotation = value; }
+            get => _rigidBody.rotation;
+            set => _rigidBody.rotation = value;
         }
 
         public Vector3 Position
         {
-            get { return _rigidBody.position; }
-            set { _rigidBody.position = value; }
+            get => _rigidBody.position;
+            set => _rigidBody.position = value;
         }
 
-        public Vector3 Velocity
-        {
-            get { return _rigidBody.linearVelocity; }
-        }
+        public Vector3 Velocity => _rigidBody.linearVelocity;
 
         public void TakeDamage(float healthLoss)
         {
-            _health = Mathf.Max(0.0f, _health - healthLoss);
+            Health = Mathf.Max(0.0f, Health - healthLoss);
         }
 
         public void AddForce(Vector3 force)

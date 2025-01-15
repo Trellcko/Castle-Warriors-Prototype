@@ -6,32 +6,20 @@ namespace Zenject.Asteroids
 {
     public class Asteroid : MonoBehaviour
     {
-        LevelHelper _level;
-        Rigidbody _rigidBody;
-        Settings _settings;
-
-        // We could just add [Inject] to the field declarations but
-        // it's often better practice to use PostInject methods
-        // Note that we can't use Constructors here because this is
-        // a MonoBehaviour
-        [Inject]
-        public void Construct(LevelHelper level, Settings settings)
-        {
-            _level = level;
-            _settings = settings;
-            _rigidBody = GetComponent<Rigidbody>();
-        }
+        private LevelHelper _level;
+        private Rigidbody _rigidBody;
+        private Settings _settings;
 
         public Vector3 Position
         {
-            get { return transform.position; }
-            set { transform.position = value; }
+            get => transform.position;
+            set => transform.position = value;
         }
 
         public float Mass
         {
-            get { return _rigidBody.mass; }
-            set { _rigidBody.mass = value; }
+            get => _rigidBody.mass;
+            set => _rigidBody.mass = value;
         }
 
         public float Scale
@@ -53,8 +41,20 @@ namespace Zenject.Asteroids
 
         public Vector3 Velocity
         {
-            get { return _rigidBody.linearVelocity; }
-            set { _rigidBody.linearVelocity = value; }
+            get => _rigidBody.linearVelocity;
+            set => _rigidBody.linearVelocity = value;
+        }
+
+        // We could just add [Inject] to the field declarations but
+        // it's often better practice to use PostInject methods
+        // Note that we can't use Constructors here because this is
+        // a MonoBehaviour
+        [Inject]
+        public void Construct(LevelHelper level, Settings settings)
+        {
+            _level = level;
+            _settings = settings;
+            _rigidBody = GetComponent<Rigidbody>();
         }
 
         public void FixedTick()
@@ -74,29 +74,21 @@ namespace Zenject.Asteroids
             CheckForTeleport();
         }
 
-        void CheckForTeleport()
+        private void CheckForTeleport()
         {
             if (Position.x > _level.Right + Scale && IsMovingInDirection(Vector3.right))
-            {
                 transform.SetX(_level.Left - Scale);
-            }
             else if (Position.x < _level.Left - Scale && IsMovingInDirection(-Vector3.right))
-            {
                 transform.SetX(_level.Right + Scale);
-            }
             else if (Position.y < _level.Bottom - Scale && IsMovingInDirection(-Vector3.up))
-            {
                 transform.SetY(_level.Top + Scale);
-            }
             else if (Position.y > _level.Top + Scale && IsMovingInDirection(Vector3.up))
-            {
                 transform.SetY(_level.Bottom - Scale);
-            }
 
             transform.RotateAround(transform.position, Vector3.up, 30 * Time.deltaTime);
         }
 
-        bool IsMovingInDirection(Vector3 dir)
+        private bool IsMovingInDirection(Vector3 dir)
         {
             return Vector3.Dot(dir, _rigidBody.linearVelocity) > 0;
         }

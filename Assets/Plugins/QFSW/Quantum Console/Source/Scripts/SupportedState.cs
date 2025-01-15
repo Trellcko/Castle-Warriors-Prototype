@@ -1,7 +1,7 @@
 ﻿namespace QFSW.QC
 {
     /// <summary>
-    /// Which states of the build will be supported.
+    ///     Which states of the build will be supported.
     /// </summary>
     public enum SupportedState
     {

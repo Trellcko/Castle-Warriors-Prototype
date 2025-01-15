@@ -14,22 +14,14 @@ namespace QFSW.QC.Pooling
         public Pool(int objCount)
         {
             _objs = new Stack<T>(objCount);
-            for (int i = 0; i < objCount; i++)
-            {
-                _objs.Push(new T());
-            }
+            for (var i = 0; i < objCount; i++) _objs.Push(new T());
         }
 
         public T GetObject()
         {
-            if (_objs.Count > 0)
-            {
-                return _objs.Pop();
-            }
-            else
-            {
-                return new T();
-            }
+            if (_objs.Count > 0) return _objs.Pop();
+
+            return new T();
         }
 
         public void Release(T obj)

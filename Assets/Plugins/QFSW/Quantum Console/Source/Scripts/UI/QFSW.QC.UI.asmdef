@@ -1,15 +1,15 @@
 {
-    "name": "QFSW.QC.UI",
-    "references": [
-        "QFSW.QC",
-        "Unity.TextMeshPro"
-    ],
-    "optionalUnityReferences": [],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": []
+  "name": "QFSW.QC.UI",
+  "references": [
+    "QFSW.QC",
+    "Unity.TextMeshPro"
+  ],
+  "optionalUnityReferences": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": []
 }

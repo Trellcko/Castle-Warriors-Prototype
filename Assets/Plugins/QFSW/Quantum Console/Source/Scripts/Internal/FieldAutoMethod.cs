@@ -30,11 +30,19 @@ namespace QFSW.QC.Internal
                     ? (Action<FieldInfo, object>)_StaticWriter
                     : (Action<object, object>)_fieldInfo.SetValue;
 
-                _parameters = new ParameterInfo[] { new CustomParameter(_internalDelegate.Method.GetParameters()[1], _fieldInfo.FieldType, "value") };
+                _parameters = new ParameterInfo[]
+                    { new CustomParameter(_internalDelegate.Method.GetParameters()[1], _fieldInfo.FieldType, "value") };
             }
         }
 
-        private static object _StaticReader(FieldInfo field) { return field.GetValue(null); }
-        private static void _StaticWriter(FieldInfo field, object value) { field.SetValue(null, value); }
+        private static object _StaticReader(FieldInfo field)
+        {
+            return field.GetValue(null);
+        }
+
+        private static void _StaticWriter(FieldInfo field, object value)
+        {
+            field.SetValue(null, value);
+        }
     }
 }

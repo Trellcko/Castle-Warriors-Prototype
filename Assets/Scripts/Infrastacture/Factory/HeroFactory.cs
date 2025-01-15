@@ -8,7 +8,7 @@ namespace CastleWarriors.Infastructure.Factory
     public class HeroFactory : IHeroFactory
     {
         private IAssetProvider _assetProvider;
-
+        
         [Inject]
         private void Construct(IAssetProvider assetProvider)
         {
