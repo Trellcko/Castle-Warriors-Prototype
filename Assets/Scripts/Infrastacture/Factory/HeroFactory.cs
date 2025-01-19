@@ -1,4 +1,5 @@
 using CastleWarriors.Assets.Scripts.Constants;
+using CastleWarriors.GameLogic.Hero;
 using CastleWarriors.Infastructure.AssetManagment;
 using UnityEngine;
 using Zenject;
@@ -16,7 +17,46 @@ namespace CastleWarriors.Infastructure.Factory
         }
 
 
-        public GameObject CreateYoungSwordsman(Vector3 position, Quaternion quaternion, Transform parent) => 
-            _assetProvider.Instantiate(AssetsNames.YoungSwordsman, position, quaternion, parent);
+        public HeroFacade CreateHero(HeroSpawnData heroSpawnData, HeroType heroType)
+        {
+            GameObject heroSpawned = _assetProvider.Instantiate(GetPath(heroType), 
+                heroSpawnData.Position, heroSpawnData.Quaternion, heroSpawnData.Parent);
+            
+            HeroFacade facade = heroSpawned.GetComponent<HeroFacade>();
+
+            IHeroTargetChooser heroTargetChooser = facade.GetHeroComponent<IHeroTargetChooser>() as IHeroTargetChooser; 
+            heroTargetChooser?.SetMainTarget(heroSpawnData.OpponentTarget);
+            
+            return facade;
+        }
+
+        private static string GetPath(HeroType heroType)
+        {
+            return heroType switch
+            {
+                HeroType.Swordsman => AssetsNames.YoungSwordsman,
+                _ => ""
+            };
+        }
+        
     }
+
+    public struct HeroSpawnData
+    {
+        public Vector3 Position;
+        public Quaternion Quaternion;
+        public readonly Transform Parent;
+
+        public readonly Transform OpponentTarget;
+        
+        public HeroSpawnData(Vector3 position, Quaternion quaternion, 
+            Transform parent, Transform opponentTarget)
+        {
+            Position = position;
+            Quaternion = quaternion;
+            Parent = parent;
+            OpponentTarget = opponentTarget;
+        }
+    }
+    
 }

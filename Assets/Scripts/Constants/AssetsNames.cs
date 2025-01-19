@@ -2,6 +2,6 @@
 {
     public static class AssetsNames
     {
-        public const string YoungSwordsman = "Prefabs/Heroes/YoungSwordsman";
+        public const string YoungSwordsman = "Prefabs/Heroes/Swordsman";
     }
 }

@@ -7,11 +7,7 @@ namespace CastleWarriors
 {
     public class TestGameFactory : MonoBehaviour
     {
-        void Start()
-        {
-            _camera = Camera.main;
-            _heroFactory.CreateYoungSwordsman(transform.position, transform.rotation, transform);
-        }
+        [SerializeField] private Transform _testTarget;
 
         private IHeroFactory _heroFactory;
         private Camera _camera;
@@ -20,8 +16,20 @@ namespace CastleWarriors
         private void Construct(IHeroFactory heroFactory)
         {
             _heroFactory = heroFactory;
-            
         }
 
+        private void Start()
+        {
+            _camera = Camera.main;
+            
+            _heroFactory.CreateHero(CreateHeroSpawnData(), HeroType.Swordsman);
+        }
+
+        private HeroSpawnData CreateHeroSpawnData()
+        {
+            HeroSpawnData spawnData = new(transform.position, transform.rotation, 
+                transform,_testTarget);
+            return spawnData;
+        }
     }
 }

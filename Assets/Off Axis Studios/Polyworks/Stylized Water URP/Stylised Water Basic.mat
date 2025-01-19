@@ -59,19 +59,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Chop: 0.1
+    - _Chop: 0.85
     - _EmissionDulling: 100
     - _FlatShade: 1
-    - _FlowSpeed: 0.88
-    - _FlowStrength: 0.0075
+    - _FlowSpeed: 1.5
+    - _FlowStrength: 0.01
     - _FoamDistance: 0.6
-    - _FoamSpeed: 20
+    - _FoamSpeed: 15
     - _FoamTextureSize: 1
     - _Opacity: 0.51
     - _Perspective: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 1.02
+    - _Size: 3.99
     m_Colors:
     - _DarkFoamColour: {r: 0, g: 0.7254902, b: 1, a: 1}
     - _LightFoamColour: {r: 1, g: 1, b: 1, a: 1}
