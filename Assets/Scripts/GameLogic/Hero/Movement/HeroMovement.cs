@@ -9,8 +9,12 @@ namespace CastleWarriors.GameLogic.Hero.Movement
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
+        public bool IsActive { get; set; } = true;
+
         private void Update()
         {
+            if(!IsActive) return;
+            
             UpdateDestination();
             UpdateAnimation();
         }
@@ -27,23 +31,15 @@ namespace CastleWarriors.GameLogic.Hero.Movement
 
         private void UpdateDestination()
         {
-            if (_heroTargetChooser.CurrentTarget)
-            {
-                _navMeshAgent.destination = _heroTargetChooser.CurrentTarget.position;
-            }
+            if (_heroTargetChooser.CurrentTarget) _navMeshAgent.destination = _heroTargetChooser.CurrentTarget.position;
         }
 
         private void UpdateAnimation()
         {
             if (_navMeshAgent.isStopped || _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
-            {
                 _heroAnimator.SetIdle();
-                
-            }
             else
-            {
                 _heroAnimator.SetRun();
-            }
         }
     }
 }

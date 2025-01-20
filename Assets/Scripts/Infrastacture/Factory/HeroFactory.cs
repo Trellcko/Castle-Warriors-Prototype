@@ -1,6 +1,7 @@
 using CastleWarriors.Assets.Scripts.Constants;
 using CastleWarriors.GameLogic.Hero;
 using CastleWarriors.Infastructure.AssetManagment;
+using CastleWarriors.Infastructure.Factory.Data;
 using UnityEngine;
 using Zenject;
 
@@ -40,23 +41,4 @@ namespace CastleWarriors.Infastructure.Factory
         }
         
     }
-
-    public struct HeroSpawnData
-    {
-        public Vector3 Position;
-        public Quaternion Quaternion;
-        public readonly Transform Parent;
-
-        public readonly Transform OpponentTarget;
-        
-        public HeroSpawnData(Vector3 position, Quaternion quaternion, 
-            Transform parent, Transform opponentTarget)
-        {
-            Position = position;
-            Quaternion = quaternion;
-            Parent = parent;
-            OpponentTarget = opponentTarget;
-        }
-    }
-    
 }

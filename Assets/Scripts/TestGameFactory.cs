@@ -1,5 +1,5 @@
-using System;
 using CastleWarriors.Infastructure.Factory;
+using CastleWarriors.Infastructure.Factory.Data;
 using UnityEngine;
 using Zenject;
 
@@ -28,7 +28,7 @@ namespace CastleWarriors
         private HeroSpawnData CreateHeroSpawnData()
         {
             HeroSpawnData spawnData = new(transform.position, transform.rotation, 
-                transform,_testTarget);
+                transform, _testTarget);
             return spawnData;
         }
     }

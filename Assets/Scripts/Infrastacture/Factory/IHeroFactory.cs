@@ -1,4 +1,5 @@
 ﻿using CastleWarriors.GameLogic.Hero;
+using CastleWarriors.Infastructure.Factory.Data;
 using UnityEngine;
 
 namespace CastleWarriors.Infastructure.Factory
