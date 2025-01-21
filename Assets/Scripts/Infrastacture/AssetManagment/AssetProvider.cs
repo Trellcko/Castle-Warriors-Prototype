@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine;
 
-namespace CastleWarriors.Infastructure.AssetManagment
+namespace CastleWarriors.Infastructure.Services.AssetManagment
 {
     public class AssetProvider : IAssetProvider
     {
@@ -56,12 +57,9 @@ namespace CastleWarriors.Infastructure.AssetManagment
 
         public void CleanUp()
         {
-            foreach (var handleList in _handles.Values)
+            foreach (AsyncOperationHandle resourceHandle in _handles.Values.SelectMany(handleList => handleList))
             {
-                foreach (var resourceHandle in handleList)
-                {
-                    Addressables.Release(resourceHandle);
-                }
+                Addressables.Release(resourceHandle);
             }
             _handles.Clear();
             _completed.Clear();

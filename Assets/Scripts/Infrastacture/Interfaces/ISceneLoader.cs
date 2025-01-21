@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CastleWarriors.Infastructure
+namespace CastleWarriors.Infastructure.Services
 {
     public interface ISceneLoader
     {

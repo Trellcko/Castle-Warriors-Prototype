@@ -1,9 +1,9 @@
-using CastleWarriors.Infastructure.States;
+using CastleWarriors.Infastructure.Services.States;
 using CastleWarriors.UI;
 using CastleWarriors.Utils.FSM;
 using Zenject;
 
-namespace CastleWarriors.Infastructure
+namespace CastleWarriors.Infastructure.Services
 {
     public class GameBehaviour : ITickable, IInitializable, IGameBehaviour
     {

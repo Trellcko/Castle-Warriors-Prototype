@@ -2,21 +2,21 @@
 using System.Linq;
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Hero
+namespace CastleWarriors.GameLogic
 {
     public class HeroFacade : MonoBehaviour
     {
-        private readonly List<IHeroComponent> _heroComponents = new();
+        public readonly List<IHeroComponent> HeroComponents = new();
         
         private void Awake() 
         {
-            foreach (var heroComponent in GetComponentsInChildren<IHeroComponent>())
+            foreach (IHeroComponent heroComponent in GetComponentsInChildren<IHeroComponent>())
             {
-                _heroComponents.Add(heroComponent);
+                HeroComponents.Add(heroComponent);
             }
         }
         
-        public IHeroComponent GetHeroComponent<T>() where T : IHeroComponent => 
-            _heroComponents.FirstOrDefault(x => x is T);
+        public T GetHeroComponent<T>() where T : class, IHeroComponent => 
+            HeroComponents.FirstOrDefault(x => x is T) as T;
     }
 }

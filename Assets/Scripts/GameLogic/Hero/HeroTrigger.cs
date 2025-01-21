@@ -1,7 +1,8 @@
+using CastleWarriors.GameLogic.Data;
 using CastleWarriors.Utils;
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Hero
+namespace CastleWarriors.GameLogic
 {
     public class HeroTrigger : MonoBehaviour, IHeroTriggerComponent
     {
@@ -10,6 +11,7 @@ namespace CastleWarriors.GameLogic.Hero
         public bool IsActive { get; set; } = true;
 
         private LayerMask _enemyLayer;
+
         private readonly Collider[] _colliders = new Collider[10];
 
         private void OnDrawGizmosSelected()
@@ -18,11 +20,16 @@ namespace CastleWarriors.GameLogic.Hero
             Gizmos.DrawWireSphere(transform.position, _radius);
         }
 
-        public void Init(LayerMask enemyLayer)
+        public void Init(HeroData hero)
+        {
+            _radius = ((HeroFighterData)hero).TriggerDistance;
+        }
+
+        public void SetOpponentLayerMask(LayerMask enemyLayer)
         {
             _enemyLayer = enemyLayer;
         }
-        
+
         public Transform GetClosetTarget()
         {
             int count = Physics.OverlapSphereNonAlloc(transform.position, _radius, _colliders, _enemyLayer);

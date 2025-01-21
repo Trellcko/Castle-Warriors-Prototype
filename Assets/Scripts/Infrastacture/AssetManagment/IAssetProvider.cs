@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace CastleWarriors.Infastructure.AssetManagment
+namespace CastleWarriors.Infastructure.Services.AssetManagment
 {
     public interface IAssetProvider
     {

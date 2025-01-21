@@ -1,8 +1,8 @@
-﻿using CastleWarriors.GameLogic.Hero;
-using CastleWarriors.Infastructure.Factory.Data;
+﻿using CastleWarriors.GameLogic;
+using CastleWarriors.Infastructure.Services.Factory.Data;
 using UnityEngine;
 
-namespace CastleWarriors.Infastructure.Factory
+namespace CastleWarriors.Infastructure.Services.Factory
 {
     public interface IHeroFactory
     {

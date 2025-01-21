@@ -1,4 +1,4 @@
-﻿namespace CastleWarriors.GameLogic.Hero.Movement
+﻿namespace CastleWarriors.GameLogic.Movement
 {
     public interface IMovementComponent : IHeroComponent
     {

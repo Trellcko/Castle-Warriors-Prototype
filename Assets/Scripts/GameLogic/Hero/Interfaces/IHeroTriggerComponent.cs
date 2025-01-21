@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Hero
+namespace CastleWarriors.GameLogic
 {
     public interface IHeroTriggerComponent : IHeroComponent
     {
-        void Init(LayerMask enemyLayer);
+        void SetOpponentLayerMask(LayerMask enemyLayer);
         Transform GetClosetTarget();
     }
 }

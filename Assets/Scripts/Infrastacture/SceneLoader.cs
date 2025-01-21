@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace CastleWarriors.Infastructure
+namespace CastleWarriors.Infastructure.Services
 {
     public class SceneLoader : ISceneLoader
     {

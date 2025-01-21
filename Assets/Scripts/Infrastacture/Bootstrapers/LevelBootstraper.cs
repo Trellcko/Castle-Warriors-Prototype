@@ -1,13 +1,21 @@
-using CastleWarriors.Infastructure.Factory;
+using CastleWarriors.Infastructure.Services.Factory;
 using Zenject;
 
-namespace CastleWarriors.Infastructure.Boostrapers
+namespace CastleWarriors.Infastructure.Services.Boostrapers
 {
     public class LevelBootstraper : MonoInstaller
-    {
+    {   
         public override void InstallBindings()
         {
             BindHeroFactory();
+            BindHeroStaticDataService();
+        }
+
+        private void BindHeroStaticDataService()
+        {
+            Container.Bind<IHeroDataService>()
+                .To<HeroDataService>()
+                .AsSingle();
         }
 
         private void BindHeroFactory()

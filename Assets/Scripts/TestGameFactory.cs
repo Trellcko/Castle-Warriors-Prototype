@@ -1,6 +1,7 @@
-using CastleWarriors.Infastructure.Factory;
-using CastleWarriors.Infastructure.Factory.Data;
+using CastleWarriors.Infastructure.Services.Factory;
+using CastleWarriors.Infastructure.Services.Factory.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace CastleWarriors
@@ -8,6 +9,8 @@ namespace CastleWarriors
     public class TestGameFactory : MonoBehaviour
     {
         [SerializeField] private Transform _testTarget;
+        [SerializeField] private LayerMask _opponentLayerMask;
+        [SerializeField] private LayerMask _myLayerMask;
 
         private IHeroFactory _heroFactory;
         private Camera _camera;
@@ -28,7 +31,7 @@ namespace CastleWarriors
         private HeroSpawnData CreateHeroSpawnData()
         {
             HeroSpawnData spawnData = new(transform.position, transform.rotation, 
-                transform, _testTarget);
+                transform, _testTarget, _opponentLayerMask, _myLayerMask);
             return spawnData;
         }
     }

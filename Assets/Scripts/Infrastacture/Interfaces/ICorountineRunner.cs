@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace CastleWarriors.Infastructure
+namespace CastleWarriors.Infastructure.Services
 {
     public interface ICorountineRunner
     {

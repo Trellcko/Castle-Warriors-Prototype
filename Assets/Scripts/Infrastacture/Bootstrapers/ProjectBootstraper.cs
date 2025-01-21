@@ -1,10 +1,10 @@
-using CastleWarriors.Infastructure.AssetManagment;
 using CastleWarriors.UI;
 using System;
+using CastleWarriors.Infastructure.Services.AssetManagment;
 using UnityEngine;
 using Zenject;
 
-namespace CastleWarriors.Infastructure.Boostrapers
+namespace CastleWarriors.Infastructure.Services.Boostrapers
 {
     public class ProjectBootstraper : MonoInstaller, ICorountineRunner
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Hero.Data
+namespace CastleWarriors.GameLogic.Data
 {
     [CreateAssetMenu(fileName = "HeroData", menuName = "SO/HeroFighterData")]
     public class HeroFighterData : HeroData
@@ -9,5 +9,6 @@ namespace CastleWarriors.GameLogic.Hero.Data
         [field: SerializeField] public float DelayBetweenAttack { get; private set; }
         [field: SerializeField] public float AttackCounts { get; private set; }
         [field: SerializeField] public float TriggerDistance { get; private set; }
+        [field: SerializeField] public float DistanceToStartAttack {get; private set;}
     }
 }

@@ -1,7 +1,8 @@
 using System;
+using CastleWarriors.GameLogic.Data;
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Hero
+namespace CastleWarriors.GameLogic
 {
     public class HeroHealth : MonoBehaviour, IHeroHealthComponent
     {
@@ -10,8 +11,12 @@ namespace CastleWarriors.GameLogic.Hero
         public bool IsActive { set; get; } = true;
 
         public event Action Changed;
-
-
+        
+        public void Init(HeroData hero)
+        {
+            MaxValue = CurrentValue = hero.Health;
+        }
+        
         public void TakeDamage(float damage)
         {
             if(!IsActive) return;

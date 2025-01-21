@@ -1,13 +1,6 @@
-﻿using System;
-
-namespace CastleWarriors.GameLogic.Hero
+﻿namespace CastleWarriors.GameLogic
 {
-    public interface IHeroHealthComponent : IHeroComponent
+    public interface IHeroHealthComponent : IHeroComponent, IHealthComponent
     {
-        float MaxValue { get; }
-        float CurrentValue { get; }
-        void TakeDamage(float damage);
-        void Heal(float heal);
-        event Action Changed;
     }
 }

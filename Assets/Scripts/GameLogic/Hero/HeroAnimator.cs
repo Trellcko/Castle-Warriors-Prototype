@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using CastleWarriors.GameLogic.Data;
+using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CastleWarriors.GameLogic.Hero
+namespace CastleWarriors.GameLogic
 {
     public class HeroAnimator : MonoBehaviour, IHeroAnimator
     {
@@ -19,6 +20,11 @@ namespace CastleWarriors.GameLogic.Hero
         }
 
         private static readonly int Speed = Animator.StringToHash("Speed");
+
+        public void Init(HeroData hero)
+        {
+            
+        }
 
         public void SetIdle()
         {

@@ -1,7 +1,7 @@
 ﻿using CastleWarriors.UI;
 using CastleWarriors.Utils.FSM;
 
-namespace CastleWarriors.Infastructure.States
+namespace CastleWarriors.Infastructure.Services.States
 {
     public class LoadLevelState : BaseState
     {

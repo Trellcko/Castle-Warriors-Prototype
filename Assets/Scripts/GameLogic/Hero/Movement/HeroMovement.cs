@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using CastleWarriors.GameLogic.Data;
+using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
-namespace CastleWarriors.GameLogic.Hero.Movement
+namespace CastleWarriors.GameLogic.Movement
 {
     public class HeroMovement : MonoBehaviour, IMovementComponent
     {
-        [SerializeField] private HeroTargetChooser _heroTargetChooser;
+        [FormerlySerializedAs("_heroTargetChooser")] [SerializeField] private HeroAttackTargetChooser heroAttackTargetChooser;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
@@ -17,6 +19,11 @@ namespace CastleWarriors.GameLogic.Hero.Movement
             
             UpdateDestination();
             UpdateAnimation();
+        }
+
+        public void Init(HeroData hero)
+        {
+            _navMeshAgent.speed = hero.Speed;
         }
 
         public void StopMoving()
@@ -31,7 +38,7 @@ namespace CastleWarriors.GameLogic.Hero.Movement
 
         private void UpdateDestination()
         {
-            if (_heroTargetChooser.CurrentTarget) _navMeshAgent.destination = _heroTargetChooser.CurrentTarget.position;
+            if (heroAttackTargetChooser.CurrentTarget) _navMeshAgent.destination = heroAttackTargetChooser.CurrentTarget.position;
         }
 
         private void UpdateAnimation()
