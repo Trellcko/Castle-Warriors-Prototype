@@ -5,6 +5,6 @@ namespace CastleWarriors.GameLogic
     public interface IHeroTriggerComponent : IHeroComponent
     {
         void SetOpponentLayerMask(LayerMask enemyLayer);
-        Transform GetClosetTarget();
+        Transform GetClosetOpponent();
     }
 }

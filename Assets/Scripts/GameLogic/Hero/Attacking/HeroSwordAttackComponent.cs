@@ -14,41 +14,45 @@ namespace CastleWarriors.GameLogic.Attacking
         public bool IsActive { get; set; } = true;
         
         private float _damage;
-        private float _count;
+        private float _attackComboCount;
         private float _delayBetweenCombos;
         private float _distanceToAttack;
 
-        private BetterTimer _betterTimer;
-        
+        private BetterTimer _timerToAttack;
         private IHealthComponent _healthTargetComponent;
         
-        private const float TimeToCheckDistance = 0.2f;
+        private int _currentComboCount;
 
         public void Init(HeroData hero)
         {
             HeroFighterData heroFighterData = (HeroFighterData)hero;
+            
             _damage = heroFighterData.Damage;
-            _count = heroFighterData.AttackCounts;
+            _attackComboCount = heroFighterData.AttackCounts;
+            
             _delayBetweenCombos = heroFighterData.DelayBetweenAttack;
             _distanceToAttack = heroFighterData.DistanceToStartAttack;
-            _betterTimer = new(_delayBetweenCombos, playAwake: true, loop: true);
+            
+            _timerToAttack = new(_delayBetweenCombos, playAwake: true, loop: true);
+            _timerToAttack.Completed += OnDelayTimeRunOut;
         }
 
         private void OnEnable()
         {
-            _heroTargetChooser.TargetChanged+= ChangeTarget;
-            _betterTimer.Completed+= OnDelayTimeRunOut;
+            _heroTargetChooser.TargetChanged += ChangeTarget;
+            _heroAnimator.MeleeAttackFramePlayed += Attack;
         }
 
         private void OnDisable()
         {
-            _heroTargetChooser.TargetChanged-= ChangeTarget;
-            _betterTimer.Completed-= OnDelayTimeRunOut;
+            _heroTargetChooser.TargetChanged -= ChangeTarget;
+            _timerToAttack.Completed -= OnDelayTimeRunOut;
+            _heroAnimator.MeleeAttackFramePlayed -= Attack;
         }
 
-        //TODO: Complete attack logic
-        private void OnDelayTimeRunOut()
+        private void OnDestroy()
         {
+            _timerToAttack.Completed -= OnDelayTimeRunOut;
         }
 
         private void Update()
@@ -58,8 +62,16 @@ namespace CastleWarriors.GameLogic.Attacking
 
             if (_heroTargetChooser.CurrentTarget.position.DistanceSqrTo(transform.position) < _distanceToAttack)
             {
-                _betterTimer.Tick();       
+                _heroAnimator.SetMode(HeroAnimationMode.Combat);
+                _timerToAttack.Tick();       
+                return;
             }
+            _heroAnimator.SetMode(HeroAnimationMode.Movement);
+        }
+
+        private void OnDelayTimeRunOut()
+        {
+            _heroAnimator.PlayMeleeAttackAnimation();
         }
 
         private void ChangeTarget()
@@ -67,9 +79,18 @@ namespace CastleWarriors.GameLogic.Attacking
             _healthTargetComponent = _heroTargetChooser.CurrentTarget.GetComponentInChildren<IHealthComponent>();
         }
 
-        public void Attack()
+        private void Attack()
         {
-            
+            _healthTargetComponent.TakeDamage(_damage);
+            _currentComboCount++;
+            if (_currentComboCount < _attackComboCount)
+            {
+                OnDelayTimeRunOut();
+            }
+            else
+            {
+                _timerToAttack.Reset();
+            }
         }
     }
 }

@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2634994608098602130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5185271291673727310}
+  - component: {fileID: 8084025399936307854}
+  m_Layer: 0
+  m_Name: HeroAttackTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5185271291673727310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634994608098602130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3975632970678383585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8084025399936307854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634994608098602130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86590d0b64a7db648a7bc1886e98f6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 3.67
 --- !u!1 &6075322956107337797
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25910be1eb9240b88b1ebbd7215c75a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroTargetChooser: {fileID: 3423783558731015741}
+  heroAttackTargetChooser: {fileID: 3423783558731015741}
   _heroAnimator: {fileID: 7956110081148393627}
   _navMeshAgent: {fileID: 1081137558230374529}
 --- !u!1 &8980133040290039698
@@ -91,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0508246e774e30459180a713bb92ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _heroAnimator: {fileID: 7956110081148393627}
+  _heroTargetChooser: {fileID: 3423783558731015741}
 --- !u!1001 &3013828279072569637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +234,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5617600903241635184, guid: e433dfeab4697074f82964fe191b9767, type: 3}
+      propertyPath: _heroTrigger
+      value: 
+      objectReference: {fileID: 8084025399936307854}
     - target: {fileID: 6150310003828850860, guid: e433dfeab4697074f82964fe191b9767, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -231,6 +282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Swordsman
       objectReference: {fileID: 0}
+    - target: {fileID: 7887768471360646092, guid: e433dfeab4697074f82964fe191b9767, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -243,6 +298,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6150310003828850860, guid: e433dfeab4697074f82964fe191b9767, type: 3}
       insertIndex: 3
       addedObject: {fileID: 7099459317476489406}
+    - targetCorrespondingSourceObject: {fileID: 6150310003828850860, guid: e433dfeab4697074f82964fe191b9767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5185271291673727310}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e433dfeab4697074f82964fe191b9767, type: 3}
 --- !u!195 &1081137558230374529 stripped

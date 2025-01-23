@@ -1,58 +1,77 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CastleWarriors.Utils.FSM
 {
     public class StateMachine
     {
-        private Dictionary<Type, BaseState> _states;
+        private Dictionary<Type, StateZero> _states;
 
-        public BaseState CurrentState { get; private set; }
+        private StateZero _currentState;
 
-        public event Action<BaseState> StateExited;
-        public event Action<BaseState> StateEntered;
-
-        public StateMachine(params BaseState[] states)
+        public StateMachine(params StateZero[] states)
         {
-            _states = new Dictionary<Type, BaseState>();
-            foreach (var state in states)
+            _states = new();
+            foreach (StateZero state in states)
             {
                 _states.Add(state.GetType(), state);
-                state.StateCompleted += SetState;
             }
-            _states.Add(typeof(EmptyState), new EmptyState());
-            CurrentState = _states[typeof(EmptyState)];
+            AddState(new EmptyState(this));
+            _currentState = _states[typeof(EmptyState)];
         }
+
+        public void AddState(params StateZero[] states)
+        {
+            foreach (StateZero state in states)
+            {
+                _states.Add(state.GetType(), state);
+            }
+        }
+        
         public void Update()
         {
-            CurrentState.CheckTransition();
-            CurrentState.Update();
+            _currentState.CheckTransition();
+            _currentState.Update();
         }
 
         public void FixedUpdate()
         {
-            CurrentState.FixedUpdate();
+            _currentState.FixedUpdate();
         }
         public void SetState<T>() where T : BaseState
         {
-            SetState(typeof(T));
+            SetState(typeof(T), x=> ((BaseState)x).Enter());
         }
 
-        private void SetState(Type type)
+        public void SetState<T ,TPayload>(TPayload payload) where T : BaseStateWithPayLoad<TPayload>
+        {
+            SetState(typeof(T), x=> ((BaseStateWithPayLoad<TPayload>)x).Enter(payload));   
+        }
+
+        private void SetState(Type type, Action<StateZero> enterAction)
         {
             if (_states.ContainsKey(type))
             {
-                CurrentState?.Exit();
-                StateExited?.Invoke(CurrentState);
-                BaseState state = _states[type];
-                CurrentState = state;
-                CurrentState.Enter();
-                StateEntered?.Invoke(CurrentState);
+                ExitCurrentState();
+                ChangeState(type, enterAction);
                 return;
             }
 
             Debug.LogError("State: " + type.Name + " is not inclued");
+        }
+
+        private void ChangeState(Type type, Action<StateZero> enterAction)
+        {
+            StateZero state = _states[type];
+            _currentState = state;
+            enterAction(_currentState);
+        }
+
+        private void ExitCurrentState()
+        {
+            _currentState?.Exit();
         }
     }
 }

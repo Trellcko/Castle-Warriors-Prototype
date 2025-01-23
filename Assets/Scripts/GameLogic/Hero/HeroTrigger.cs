@@ -30,7 +30,7 @@ namespace CastleWarriors.GameLogic
             _enemyLayer = enemyLayer;
         }
 
-        public Transform GetClosetTarget()
+        public Transform GetClosetOpponent()
         {
             int count = Physics.OverlapSphereNonAlloc(transform.position, _radius, _colliders, _enemyLayer);
             Transform closetTarget = null;

@@ -1,14 +1,15 @@
-﻿using CastleWarriors.GameLogic.Data;
+﻿using System;
+using CastleWarriors.GameLogic.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CastleWarriors.GameLogic
 {
     public class HeroAnimator : MonoBehaviour, IHeroAnimator
     {
         [SerializeField] private Animator _animator;
-        private bool _isActive = true;
 
+        public event Action MeleeAttackFramePlayed;
+        
         public bool IsActive
         {
             get => _isActive;
@@ -18,14 +19,20 @@ namespace CastleWarriors.GameLogic
                 _animator.speed = value ? 1f : 0f;
             }
         }
+        
+        private bool _isActive = true;
 
         private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Mode = Animator.StringToHash("Mode");
 
-        public void Init(HeroData hero)
+        public void Init(HeroData hero){ }
+
+        public void SetMode(HeroAnimationMode mode)
         {
-            
+            _animator.SetInteger(Mode, (int)mode);            
         }
-
+        
         public void SetIdle()
         {
             if(!_isActive) return;
@@ -39,11 +46,22 @@ namespace CastleWarriors.GameLogic
 
             _animator.SetFloat(Speed, 1f);
         }
+
+        public void PlayMeleeAttackAnimation()
+        {
+            if (_isActive) return;
+                _animator.SetTrigger(Attack);
+        }
+
+        public void InvokeMeleeAttackFramePlayed()
+        {
+            MeleeAttackFramePlayed?.Invoke();
+        }
     }
 
-    public interface IHeroAnimator : IHeroComponent
+    public enum HeroAnimationMode
     {
-        void SetIdle();
-        void SetRun();
+        Movement,
+        Combat,
     }
 }

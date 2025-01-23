@@ -38,7 +38,8 @@ namespace CastleWarriors.GameLogic.Movement
 
         private void UpdateDestination()
         {
-            if (heroAttackTargetChooser.CurrentTarget) _navMeshAgent.destination = heroAttackTargetChooser.CurrentTarget.position;
+            if (heroAttackTargetChooser.CurrentTarget) 
+                _navMeshAgent.destination = heroAttackTargetChooser.CurrentTarget.position;
         }
 
         private void UpdateAnimation()

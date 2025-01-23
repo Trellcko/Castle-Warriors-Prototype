@@ -1,37 +1,14 @@
-using System.Collections.Generic;
-using System;
-
 namespace CastleWarriors.Utils.FSM 
-{ 
-    public abstract class BaseState
+{
+    public abstract class BaseState : StateZero
     {
-        public event Action<Type> StateCompleted;
-        private Dictionary<Func<bool>, Action> _transitions = new();
-
-        public void CheckTransition()
+        protected BaseState(StateMachine machine) : base(machine)
         {
-            foreach (var transition in _transitions)
-            {
-                if (transition.Key())
-                {
-                    transition.Value();
-                    break;
-                }
-            }
+            
         }
+
         public virtual void Enter() { }
-        public virtual void Update() { }
 
-        public virtual void FixedUpdate() { }
-        public virtual void Exit() { }
-        protected void GoToState<T>(Func<bool> when) where T : BaseState
-        {
-            _transitions.Add(when, GoToState<T>);
-        }
-        protected void GoToState<T>() where T : BaseState
-        {
-            StateCompleted?.Invoke(typeof(T));
-        }
     }
 }
 

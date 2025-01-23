@@ -20,13 +20,20 @@ namespace CastleWarriors.Infastructure.Services
 
         public void Initialize()
         {
-            _stateMachine = new(
-                new LoadLevelState(_loadingCurtain, _sceneLoader)
-                );
+            _stateMachine = new();
 
+            _stateMachine.AddState(
+                new LoadLevelState(_loadingCurtain, _sceneLoader, _stateMachine),
+                new InitLevelState(_stateMachine));
+            
             _stateMachine.SetState<LoadLevelState>();
         }
 
+        public void InitLevel(IHeroDataService heroDataService)
+        {
+            _stateMachine.SetState<InitLevelState, IHeroDataService>(heroDataService);
+        }
+        
         public void Tick() => 
             _stateMachine.Update();
     }

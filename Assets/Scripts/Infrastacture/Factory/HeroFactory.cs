@@ -37,6 +37,7 @@ namespace CastleWarriors.Infastructure.Services.Factory
 
         private static void TrySetLayers(HeroFacade facade, LayerMask opponentMask, LayerMask myMask)
         {
+            facade.gameObject.layer = myMask;
             IHeroTriggerComponent triggerComponent = facade.GetHeroComponent<IHeroTriggerComponent>();
             triggerComponent?.SetOpponentLayerMask(opponentMask);
         }

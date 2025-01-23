@@ -38,7 +38,7 @@ namespace CastleWarriors.GameLogic
 
         private void TryDistract()
         {
-            Transform closetTarget = _heroTrigger.GetClosetTarget();
+            Transform closetTarget = _heroTrigger.GetClosetOpponent();
 
             if (!closetTarget) return;
            

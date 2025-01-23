@@ -1,3 +1,4 @@
+using CastleWarriors.GameLogic;
 using CastleWarriors.Infastructure.Services.Factory;
 using Zenject;
 
@@ -9,6 +10,13 @@ namespace CastleWarriors.Infastructure.Services.Boostrapers
         {
             BindHeroFactory();
             BindHeroStaticDataService();
+            BindInitLevelStateInvoker();
+        }
+
+        private void BindInitLevelStateInvoker()
+        {
+            Container.BindInterfacesTo<InitLevelStateInvoker>()
+                .AsSingle();
         }
 
         private void BindHeroStaticDataService()

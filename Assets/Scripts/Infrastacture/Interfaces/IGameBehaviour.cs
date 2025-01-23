@@ -2,5 +2,6 @@
 {
     public interface IGameBehaviour
     {
+        void InitLevel(IHeroDataService heroDataService);
     }
 }
