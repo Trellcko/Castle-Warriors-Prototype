@@ -69,5 +69,6 @@ namespace CastleWarriors.GameLogic
         None = -1,
         Movement = 0,
         Combat = 1,
+        Dying = 2,
     }
 }
