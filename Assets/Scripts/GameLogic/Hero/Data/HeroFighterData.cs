@@ -9,6 +9,5 @@ namespace CastleWarriors.GameLogic.Data
         [field: SerializeField] public float DelayBetweenAttack { get; private set; }
         [field: SerializeField] public int AttackCounts { get; private set; }
         [field: SerializeField] public float TriggerDistance { get; private set; }
-        [field: SerializeField] public float DistanceToStartAttack {get; private set;}
     }
 }

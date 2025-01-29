@@ -9,6 +9,8 @@ namespace CastleWarriors.GameLogic
         [SerializeField] private Animator _animator;
 
         public event Action MeleeAttackFramePlayed;
+
+        private HeroAnimationMode _currentMode = HeroAnimationMode.Movement;
         
         public bool IsActive
         {
@@ -24,13 +26,15 @@ namespace CastleWarriors.GameLogic
 
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Attack = Animator.StringToHash("Attack");
-        private static readonly int Mode = Animator.StringToHash("Mode");
 
         public void Init(HeroData hero){ }
 
         public void SetMode(HeroAnimationMode mode)
-        {
-            _animator.SetInteger(Mode, (int)mode);            
+        { 
+            if(_currentMode == mode) return;
+            
+            _currentMode = mode;
+            _animator.SetTrigger(mode.ToString());            
         }
         
         public void SetIdle()
@@ -49,7 +53,8 @@ namespace CastleWarriors.GameLogic
 
         public void PlayMeleeAttackAnimation()
         {
-            if (_isActive) return;
+            if (!_isActive) return;
+            
                 _animator.SetTrigger(Attack);
         }
 
@@ -61,7 +66,8 @@ namespace CastleWarriors.GameLogic
 
     public enum HeroAnimationMode
     {
-        Movement,
-        Combat,
+        None = -1,
+        Movement = 0,
+        Combat = 1,
     }
 }

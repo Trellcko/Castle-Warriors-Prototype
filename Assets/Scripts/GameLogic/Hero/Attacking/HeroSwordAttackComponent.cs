@@ -1,5 +1,6 @@
 using System;
 using CastleWarriors.GameLogic.Data;
+using CastleWarriors.GameLogic.Movement;
 using CastleWarriors.GameLogic.Utils;
 using CastleWarriors.Utils;
 using UnityEngine;
@@ -10,17 +11,20 @@ namespace CastleWarriors.GameLogic.Attacking
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroAttackTargetChooser _heroTargetChooser;
-
-        public bool IsActive { get; set; } = true;
+        [SerializeField] private HeroMovement _heroMovement;
         
+        public bool IsActive { get; set; } = true;
+        private Transform CurrentTarget => _heroTargetChooser.CurrentTarget;
+
         private float _damage;
         private float _attackComboCount;
         private float _delayBetweenCombos;
-        private float _distanceToAttack;
+
+        private  bool _fromOtherStateToAttack = true;
 
         private BetterTimer _timerToAttack;
         private IHealthComponent _healthTargetComponent;
-        
+
         private int _currentComboCount;
 
         public void Init(HeroData hero)
@@ -31,7 +35,6 @@ namespace CastleWarriors.GameLogic.Attacking
             _attackComboCount = heroFighterData.AttackCounts;
             
             _delayBetweenCombos = heroFighterData.DelayBetweenAttack;
-            _distanceToAttack = heroFighterData.DistanceToStartAttack;
             
             _timerToAttack = new(_delayBetweenCombos, playAwake: true, loop: true);
             _timerToAttack.Completed += OnDelayTimeRunOut;
@@ -39,13 +42,13 @@ namespace CastleWarriors.GameLogic.Attacking
 
         private void OnEnable()
         {
-            _heroTargetChooser.TargetChanged += ChangeTarget;
+            _heroTargetChooser.TargetChanged += OnTargetChanged;
             _heroAnimator.MeleeAttackFramePlayed += Attack;
         }
 
         private void OnDisable()
         {
-            _heroTargetChooser.TargetChanged -= ChangeTarget;
+            _heroTargetChooser.TargetChanged -= OnTargetChanged;
             _timerToAttack.Completed -= OnDelayTimeRunOut;
             _heroAnimator.MeleeAttackFramePlayed -= Attack;
         }
@@ -60,13 +63,33 @@ namespace CastleWarriors.GameLogic.Attacking
             if(_healthTargetComponent == null)
                 return;
 
-            if (_heroTargetChooser.CurrentTarget.position.DistanceSqrTo(transform.position) < _distanceToAttack)
+            if (_heroMovement.IsIdle)
             {
                 _heroAnimator.SetMode(HeroAnimationMode.Combat);
+                
+                LookAtTarget();
+                if (_fromOtherStateToAttack)
+                {
+                    _fromOtherStateToAttack = false;
+                    OnDelayTimeRunOut();
+                    _timerToAttack.Reset();
+                }
                 _timerToAttack.Tick();       
                 return;
             }
-            _heroAnimator.SetMode(HeroAnimationMode.Movement);
+            _fromOtherStateToAttack = true;
+        }
+
+        private void LookAtTarget()
+        {
+            Vector3 direction = CurrentTarget.position - transform.parent.position;
+            direction.y = 0;
+
+            if (direction.magnitude < 0.01f) return;
+            
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            transform.parent.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _heroMovement.RotationSpeed * Time.deltaTime);
         }
 
         private void OnDelayTimeRunOut()
@@ -74,9 +97,9 @@ namespace CastleWarriors.GameLogic.Attacking
             _heroAnimator.PlayMeleeAttackAnimation();
         }
 
-        private void ChangeTarget()
+        private void OnTargetChanged()
         {
-            _healthTargetComponent = _heroTargetChooser.CurrentTarget.GetComponentInChildren<IHealthComponent>();
+            _healthTargetComponent = CurrentTarget.GetComponentInChildren<IHealthComponent>();
         }
 
         private void Attack()

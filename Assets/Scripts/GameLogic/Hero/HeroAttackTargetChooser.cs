@@ -13,7 +13,7 @@ namespace CastleWarriors.GameLogic
 
         private Transform _mainTarget;
 
-        private bool _canBeDistracted;
+        private bool _canBeDistracted = true;
 
         private BetterTimer _betterTimer;
         

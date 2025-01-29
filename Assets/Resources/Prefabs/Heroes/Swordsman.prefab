@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroAnimator: {fileID: 7956110081148393627}
   _heroTargetChooser: {fileID: 3423783558731015741}
+  _heroMovement: {fileID: 4455922978331442149}
 --- !u!1001 &3013828279072569637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +282,10 @@ PrefabInstance:
     - target: {fileID: 7760821555282539020, guid: e433dfeab4697074f82964fe191b9767, type: 3}
       propertyPath: m_Name
       value: Swordsman
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887768471360646092, guid: e433dfeab4697074f82964fe191b9767, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 7887768471360646092, guid: e433dfeab4697074f82964fe191b9767, type: 3}
       propertyPath: m_StoppingDistance

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cdaf84abd624a78a780c6f82e8d708b, type: 3}
-  m_Name: SwordMan
+  m_Name: SwordsMan
   m_EditorClassIdentifier: 
   <HeroType>k__BackingField: 0
   <HeroPrefab>k__BackingField: {fileID: 704243066085753153, guid: 4210bac52591bc543b31684d47ae370d, type: 3}
+  <StoppingDistance>k__BackingField: 4
   <Speed>k__BackingField: 3.5
   <Health>k__BackingField: 100
   <Damage>k__BackingField: 10
   <DelayBetweenAttack>k__BackingField: 2
   <AttackCounts>k__BackingField: 1
   <TriggerDistance>k__BackingField: 3
-  <DistanceToStartAttack>k__BackingField: 3

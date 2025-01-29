@@ -7,11 +7,15 @@ namespace CastleWarriors.GameLogic.Movement
 {
     public class HeroMovement : MonoBehaviour, IMovementComponent
     {
-        [FormerlySerializedAs("_heroTargetChooser")] [SerializeField] private HeroAttackTargetChooser heroAttackTargetChooser;
+        [SerializeField] private HeroAttackTargetChooser heroAttackTargetChooser;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
+        public float RotationSpeed => _navMeshAgent.angularSpeed;
+        
         public bool IsActive { get; set; } = true;
+        
+        public bool IsIdle { get; set; } = true;
 
         private void Update()
         {
@@ -24,6 +28,7 @@ namespace CastleWarriors.GameLogic.Movement
         public void Init(HeroData hero)
         {
             _navMeshAgent.speed = hero.Speed;
+            _navMeshAgent.stoppingDistance = hero.StoppingDistance;
         }
 
         public void StopMoving()
@@ -45,9 +50,16 @@ namespace CastleWarriors.GameLogic.Movement
         private void UpdateAnimation()
         {
             if (_navMeshAgent.isStopped || _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+            {
+                IsIdle = true;
                 _heroAnimator.SetIdle();
+            }
             else
+            {
+                IsIdle = false;
+                _heroAnimator.SetMode(HeroAnimationMode.Movement);
                 _heroAnimator.SetRun();
+            }
         }
     }
 }

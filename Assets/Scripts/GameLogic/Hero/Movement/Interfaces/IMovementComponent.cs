@@ -4,5 +4,6 @@
     {
         void StopMoving();
         void ResumeMoving();
+        bool IsIdle { get; set; }
     }
 }
