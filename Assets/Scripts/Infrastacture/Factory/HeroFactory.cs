@@ -2,6 +2,7 @@ using CastleWarriors.GameLogic;
 using CastleWarriors.GameLogic.Data;
 using CastleWarriors.Infastructure.Services.AssetManagment;
 using CastleWarriors.Infastructure.Services.Factory.Data;
+using CastleWarriors.Utils;
 using UnityEngine;
 using Zenject;
 
@@ -37,7 +38,9 @@ namespace CastleWarriors.Infastructure.Services.Factory
 
         private static void TrySetLayers(HeroFacade facade, LayerMask opponentMask, LayerMask myMask)
         {
-            facade.gameObject.layer = myMask;
+            
+            Debug.Log(myMask.GetLayerInteger());
+            facade.gameObject.layer = myMask.GetLayerInteger();
             IHeroTriggerComponent triggerComponent = facade.GetHeroComponent<IHeroTriggerComponent>();
             triggerComponent?.SetOpponentLayerMask(opponentMask);
         }
