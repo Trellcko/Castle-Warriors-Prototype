@@ -89,6 +89,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e7e8341c2348a3bc2434cafc32132d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _heroTrigger: {fileID: 0}
+--- !u!1 &6488753909954303201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2624062224982639594}
+  - component: {fileID: 1078129222487221926}
+  m_Layer: 0
+  m_Name: HeroDying
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2624062224982639594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488753909954303201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6150310003828850860}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078129222487221926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488753909954303201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b2d2b40a2c4d378b539a7bdcbc2a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroFacade: {fileID: 6339041361319309789}
 --- !u!1 &7760821555282539020
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +168,7 @@ Transform:
   m_Children:
   - {fileID: 2419752181370765113}
   - {fileID: 4773463179971789135}
+  - {fileID: 2624062224982639594}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6339041361319309789

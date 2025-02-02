@@ -1,9 +1,8 @@
-﻿using CastleWarriors.GameLogic.Data;
+﻿using CastleWarriors.GameLogic.Hero.Data;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-namespace CastleWarriors.GameLogic.Movement
+namespace CastleWarriors.GameLogic.Hero
 {
     public class HeroMovement : MonoBehaviour, IMovementComponent
     {
@@ -12,11 +11,13 @@ namespace CastleWarriors.GameLogic.Movement
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
         public float RotationSpeed => _navMeshAgent.angularSpeed;
-        
-        public bool IsActive { get; set; } = true;
-        
+
+        public bool IsActive { get; private set; } = true;
+
         public bool IsIdle { get; set; } = true;
 
+        private bool _wasStopped;
+        
         private void Update()
         {
             if(!IsActive) return;
@@ -31,6 +32,19 @@ namespace CastleWarriors.GameLogic.Movement
             _navMeshAgent.stoppingDistance = hero.StoppingDistance;
         }
 
+        public void Enable()
+        {
+            IsActive = true;
+            _navMeshAgent.isStopped = _wasStopped;
+        }
+
+        public void Disable()
+        {
+            IsActive = false;
+            _wasStopped = _navMeshAgent.isStopped;
+            _navMeshAgent.isStopped = true;
+        }
+
         public void StopMoving()
         {
             _navMeshAgent.isStopped = true;
@@ -38,7 +52,8 @@ namespace CastleWarriors.GameLogic.Movement
 
         public void ResumeMoving()
         {
-            _navMeshAgent.isStopped = false;
+            if(IsActive)
+                _navMeshAgent.isStopped = false;
         }
 
         private void UpdateDestination()

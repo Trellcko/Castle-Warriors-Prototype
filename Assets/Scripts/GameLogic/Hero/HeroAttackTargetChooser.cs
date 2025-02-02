@@ -1,5 +1,6 @@
 ﻿using System;
-using CastleWarriors.GameLogic.Data;
+using CastleWarriors.GameLogic.Hero;
+using CastleWarriors.GameLogic.Hero.Data;
 using CastleWarriors.GameLogic.Utils;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace CastleWarriors.GameLogic
     {
         [SerializeField] private HeroTrigger _heroTrigger;
         public Transform CurrentTarget { get; private set; }
+
         public bool IsActive { get; set; } = true;
 
         private Transform _mainTarget;
@@ -16,7 +18,7 @@ namespace CastleWarriors.GameLogic
         private bool _canBeDistracted = true;
 
         private BetterTimer _betterTimer;
-        
+
         public event Action TargetChanged;
 
         private const float TimeToCheckForEnemyHeroes = 0.2f;
@@ -36,18 +38,6 @@ namespace CastleWarriors.GameLogic
             _betterTimer.Completed -= TryDistract;
         }
 
-        private void TryDistract()
-        {
-            Transform closetTarget = _heroTrigger.GetClosetOpponent();
-
-            if (!closetTarget) return;
-           
-            CurrentTarget = closetTarget;
-            TargetChanged?.Invoke();
-        }
-
-        public void Init(HeroData hero){ }
-
         private void Update()
         {
             if (IsActive && _canBeDistracted)
@@ -59,6 +49,18 @@ namespace CastleWarriors.GameLogic
             
             CurrentTarget = _mainTarget;
             TargetChanged?.Invoke();
+        }
+
+        public void Init(HeroData hero){ }
+
+        public void Enable()
+        {
+            IsActive = true;
+        }
+
+        public void Disable()
+        {
+            IsActive = false;
         }
 
         public void SetMainTarget(Transform mainTarget)
@@ -85,6 +87,16 @@ namespace CastleWarriors.GameLogic
             if(!IsActive) return;
          
             _canBeDistracted = false;
+        }
+
+        private void TryDistract()
+        {
+            Transform closetTarget = _heroTrigger.GetClosetOpponent();
+
+            if (!closetTarget) return;
+           
+            CurrentTarget = closetTarget;
+            TargetChanged?.Invoke();
         }
     }
 }

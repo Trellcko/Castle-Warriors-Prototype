@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CastleWarriors.GameLogic.Hero;
 using UnityEngine;
 
 namespace CastleWarriors.GameLogic

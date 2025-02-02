@@ -1,33 +1,33 @@
 ﻿using System;
-using CastleWarriors.GameLogic.Data;
+using CastleWarriors.GameLogic.Hero.Data;
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic
+namespace CastleWarriors.GameLogic.Hero
 {
     public class HeroAnimator : MonoBehaviour, IHeroAnimator
     {
         [SerializeField] private Animator _animator;
-
         public event Action MeleeAttackFramePlayed;
 
         private HeroAnimationMode _currentMode = HeroAnimationMode.Movement;
-        
-        public bool IsActive
-        {
-            get => _isActive;
-            set
-            {
-                _isActive = value;
-                _animator.speed = value ? 1f : 0f;
-            }
-        }
-        
-        private bool _isActive = true;
+
+        public bool IsActive { get; private set; } = true;
 
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Dying = Animator.StringToHash("Dying");
 
         public void Init(HeroData hero){ }
+
+        public void Enable()
+        {
+            IsActive = true;
+        }
+
+        public void Disable()
+        {
+            IsActive = false;
+        }
 
         public void SetMode(HeroAnimationMode mode)
         { 
@@ -36,26 +36,33 @@ namespace CastleWarriors.GameLogic
             _currentMode = mode;
             _animator.SetTrigger(mode.ToString());            
         }
-        
+
+        public void SetDie()
+        {
+            if(!IsActive) return;
+            
+            _animator.SetTrigger(Dying);
+        }
+
         public void SetIdle()
         {
-            if(!_isActive) return;
+            if(!IsActive) return;
             
             _animator.SetFloat(Speed, 0f);
         }
 
         public void SetRun()
         {
-            if(!_isActive) return;
+            if(!IsActive) return;
 
             _animator.SetFloat(Speed, 1f);
         }
 
         public void PlayMeleeAttackAnimation()
         {
-            if (!_isActive) return;
+            if (!IsActive) return;
             
-                _animator.SetTrigger(Attack);
+            _animator.SetTrigger(Attack);
         }
 
         public void InvokeMeleeAttackFramePlayed()

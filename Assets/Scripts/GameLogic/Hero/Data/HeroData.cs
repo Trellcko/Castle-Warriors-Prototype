@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Data
+namespace CastleWarriors.GameLogic.Hero.Data
 {
     public abstract class HeroData : ScriptableObject
     {

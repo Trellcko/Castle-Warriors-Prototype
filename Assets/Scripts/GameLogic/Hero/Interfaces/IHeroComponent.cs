@@ -1,10 +1,12 @@
-﻿using CastleWarriors.GameLogic.Data;
+﻿using CastleWarriors.GameLogic.Hero.Data;
 
-namespace CastleWarriors.GameLogic
+namespace CastleWarriors.GameLogic.Hero
 {
     public interface IHeroComponent
     {
-        bool IsActive { get; set; }
+        void Enable();
+        void Disable();
+        bool IsActive { get; }
         void Init(HeroData hero);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Data
+namespace CastleWarriors.GameLogic.Hero.Data
 {
     [CreateAssetMenu(fileName = "HeroData", menuName = "SO/HeroFighterData")]
     public class HeroFighterData : HeroData

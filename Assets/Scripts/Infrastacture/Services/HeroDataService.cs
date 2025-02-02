@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CastleWarriors.Assets.Scripts.Constants;
-using CastleWarriors.GameLogic.Data;
+using CastleWarriors.GameLogic.Hero.Data;
 using UnityEngine;
 
 namespace CastleWarriors.Infastructure.Services

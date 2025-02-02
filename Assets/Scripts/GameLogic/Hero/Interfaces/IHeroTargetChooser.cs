@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic
+namespace CastleWarriors.GameLogic.Hero
 {
     public interface IHeroTargetChooser : IHeroComponent
     {

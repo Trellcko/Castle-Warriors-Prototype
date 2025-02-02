@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CastleWarriors.GameLogic
+namespace CastleWarriors.GameLogic.Hero
 {
     public interface IHeroAnimator : IHeroComponent
     {
@@ -8,5 +8,6 @@ namespace CastleWarriors.GameLogic
         void SetRun();
         void PlayMeleeAttackAnimation();
         event Action MeleeAttackFramePlayed;
+        void SetDie();
     }
 }

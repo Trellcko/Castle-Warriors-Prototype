@@ -1,4 +1,4 @@
-﻿using CastleWarriors.GameLogic.Data;
+﻿using CastleWarriors.GameLogic.Hero.Data;
 
 namespace CastleWarriors.Infastructure.Services
 {

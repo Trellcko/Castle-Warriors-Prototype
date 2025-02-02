@@ -1,4 +1,4 @@
-﻿namespace CastleWarriors.GameLogic.Attacking
+﻿namespace CastleWarriors.GameLogic.Hero
 {
     public interface IHeroAttackComponent : IHeroComponent
     {

@@ -9,5 +9,6 @@ namespace CastleWarriors.GameLogic
         void TakeDamage(float damage);
         void Heal(float heal);
         event Action Changed;
+        event Action ChangedToZero;
     }
 }

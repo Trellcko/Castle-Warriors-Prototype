@@ -1,28 +1,31 @@
 using System;
-using CastleWarriors.GameLogic.Data;
-using CastleWarriors.GameLogic.Movement;
+using CastleWarriors.GameLogic.Hero.Data;
 using CastleWarriors.GameLogic.Utils;
 using CastleWarriors.Utils;
 using UnityEngine;
 
-namespace CastleWarriors.GameLogic.Attacking
+namespace CastleWarriors.GameLogic.Hero
 {
     public class HeroSwordAttackComponent : MonoBehaviour, IHeroAttackComponent
     {
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroAttackTargetChooser _heroTargetChooser;
         [SerializeField] private HeroMovement _heroMovement;
-        
-        public bool IsActive { get; set; } = true;
+
+        public bool IsActive { get; private set; } = true;
+
         private Transform CurrentTarget => _heroTargetChooser.CurrentTarget;
 
         private float _damage;
+
         private float _attackComboCount;
+
         private float _delayBetweenCombos;
 
         private  bool _fromOtherStateToAttack = true;
 
         private BetterTimer _timerToAttack;
+
         private IHealthComponent _healthTargetComponent;
 
         private int _currentComboCount;
@@ -38,6 +41,16 @@ namespace CastleWarriors.GameLogic.Attacking
             
             _timerToAttack = new(_delayBetweenCombos, playAwake: true, loop: true);
             _timerToAttack.Completed += OnDelayTimeRunOut;
+        }
+
+        public void Enable()
+        {
+            IsActive = true;
+        }
+
+        public void Disable()
+        {
+            IsActive = false;
         }
 
         private void OnEnable()
@@ -60,7 +73,7 @@ namespace CastleWarriors.GameLogic.Attacking
 
         private void Update()
         {
-            if(_healthTargetComponent == null)
+            if(_healthTargetComponent == null && !IsActive)
                 return;
 
             if (_heroMovement.IsIdle)
@@ -82,6 +95,8 @@ namespace CastleWarriors.GameLogic.Attacking
 
         private void LookAtTarget()
         {
+            if (!IsActive)
+                return;
             Vector3 direction = CurrentTarget.position - transform.parent.position;
             direction.y = 0;
 

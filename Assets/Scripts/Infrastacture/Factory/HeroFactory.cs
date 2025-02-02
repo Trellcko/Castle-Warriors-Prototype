@@ -1,5 +1,6 @@
 using CastleWarriors.GameLogic;
-using CastleWarriors.GameLogic.Data;
+using CastleWarriors.GameLogic.Hero;
+using CastleWarriors.GameLogic.Hero.Data;
 using CastleWarriors.Infastructure.Services.AssetManagment;
 using CastleWarriors.Infastructure.Services.Factory.Data;
 using CastleWarriors.Utils;
