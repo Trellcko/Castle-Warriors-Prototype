@@ -11,5 +11,6 @@ AssetOrigin:
   productId: 260493
   packageName: RPG Monster BUNDLE PBR
   packageVersion: 1.0
-  assetPath: Assets/RPGMonsterBundlePBR/CommonStuffs/Scene/Wave02/Lighting Settings.lighting
+  assetPath: Assets/ExternalAssets/RPGMonsterBundlePBR/CommonStuffs/Scene/Wave02/Lighting
+    Settings.lighting
   uploadId: 681971

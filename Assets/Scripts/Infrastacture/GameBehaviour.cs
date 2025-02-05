@@ -1,6 +1,7 @@
 using CastleWarriors.Infastructure.Services.States;
 using CastleWarriors.UI;
 using CastleWarriors.Utils.FSM;
+using UnityEngine;
 using Zenject;
 
 namespace CastleWarriors.Infastructure.Services
@@ -20,6 +21,7 @@ namespace CastleWarriors.Infastructure.Services
 
         public void Initialize()
         {
+            Application.targetFrameRate = 60;
             _stateMachine = new();
 
             _stateMachine.AddState(

@@ -10,6 +10,6 @@ AssetOrigin:
   productId: 260493
   packageName: RPG Monster BUNDLE PBR
   packageVersion: 1.0
-  assetPath: Assets/RPGMonsterBundlePBR/CommonStuffs/Scene/Wave01/PBRDefault/Directional
+  assetPath: Assets/ExternalAssets/RPGMonsterBundlePBR/CommonStuffs/Scene/Wave01/PBRDefault/Directional
     Light.prefab
   uploadId: 681971

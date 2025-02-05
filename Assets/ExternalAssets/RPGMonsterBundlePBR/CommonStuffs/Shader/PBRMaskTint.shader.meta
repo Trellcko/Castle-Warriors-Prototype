@@ -13,5 +13,5 @@ AssetOrigin:
   productId: 260493
   packageName: RPG Monster BUNDLE PBR
   packageVersion: 1.0
-  assetPath: Assets/RPGMonsterBundlePBR/CommonStuffs/Shader/PBRMaskTint.shader
+  assetPath: Assets/ExternalAssets/RPGMonsterBundlePBR/CommonStuffs/Shader/PBRMaskTint.shader
   uploadId: 681971

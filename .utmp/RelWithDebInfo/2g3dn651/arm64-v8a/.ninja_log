@@ -1,0 +1,10 @@
+# ninja log v5
+38	2875	7604866911451888	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	efc10a37780d75ae
+15	2917	7604866911471854	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	fea0db131fc906fd
+6	3024	7604866912755894	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	516f8b8901202628
+32	3085	7604866913445318	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	62c2c18444a2f31
+26	3346	7604866916266535	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	edc71e95b91f992a
+1	3495	7604866917718252	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	64f487f48000f0e
+20	3887	7604866921619191	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	97827cb9724771f7
+11	3962	7604866922473273	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	81081bcafbf91614
+3963	4205	7604866924890484	E:/Projects/My/Castle Warriors/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2g3dn651/obj/arm64-v8a/libgame.so	86f03ddd84d3226
