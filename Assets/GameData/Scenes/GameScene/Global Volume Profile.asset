@@ -28,7 +28,7 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &-3715312437693795334
+--- !u!114 &-92977980140942419
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb4b772797da9440885e8bd939e9560, type: 3}
   m_Name: ColorCurves
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   master:
     m_OverrideState: 1
     m_Value:
@@ -54,7 +54,7 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
+          inSlope: 1
           outSlope: 1
           tangentMode: 0
           weightedMode: 0
@@ -63,8 +63,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0.2140767
-          outSlope: 0
+          inSlope: 0.6256619
+          outSlope: 0.6256619
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -3771293378953772312}
-  - {fileID: -3715312437693795334}
   - {fileID: 5282472811402853743}
+  - {fileID: -92977980140942419}
 --- !u!114 &5282472811402853743
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -251,7 +251,7 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: 27
+    m_Value: 28
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
